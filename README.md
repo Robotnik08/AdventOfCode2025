@@ -1,0 +1,33 @@
+# Advent of code 2025
+
+This is my repository for the Advent of Code 2024. I will be solving the puzzles in [Dosato](https://github.com/Robotnik08/cdosato).
+<br>
+
+## Context
+
+Dosato is a programming language that I created. It is a unique and robust intepreted language designed for the general purpose. It is a high-level language that is easy to learn and use. This is one of the main reasons why I chose to use Dosato for solving the Advent of Code puzzles.
+
+### Why Dosato?
+
+I like it :P, it's really not a bad language for this and I barely get any extra challenges from the language itself. It is also just cool to solve these puzzles in a language that I created myself.
+
+## How to run the code
+
+To run the code, you will need to have the Dosato interpreter installed on your machine. You can download the Dosato interpreter [here](https://github.com/Robotnik08/cdosato/releases/latest). Once you have the Dosato interpreter installed, you can run the code by typing the following command in the terminal:
+
+```
+dosato <filename>
+```
+
+Where `<filename>` is the name of the Dosato file that you want to run. For example, if you want to run the code in the file `day1.to`, you would type the following command in the terminal:
+
+```bash
+dosato day1.to
+```
+
+Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if you have any questions or suggestions. I am always happy to help.
+
+
+## Log
+
+Coming soon...
