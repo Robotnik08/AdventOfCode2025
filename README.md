@@ -30,4 +30,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
 
 ## Log
 
-Coming soon...
+### Day 1
+- Part 1
+    - Ended up doing the mathy approach
+- Part 2
+    - Mathy approach was not the easier way here, spending more time than I wanted to on this one, but switched to a more straightforward approach and got it done. (still want to optimize it later)
