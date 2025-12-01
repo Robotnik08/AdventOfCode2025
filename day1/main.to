@@ -1,30 +1,28 @@
 const input = read("input.txt")
-const lines = stringSplit(input, "\n")
+
 const movements = []
+do push(movements, to_number(i)) for i in stringSplit(input, "\n")
 
-do push(movements, to_number(i)) for i in lines
-
-make c = 50
+make dial = 50
 make amount_zero = 0
 make amount_zero2 = 0
 do {
-    const prev = c
-    set c += i
-    // set amount_zero2 += !-(c / 100)
-    if i > 0 then {
-        set amount_zero2 += !-c / 100
-    } else {
-        set amount_zero2 += !-(prev - 1) / 100
+    const prev = dial
+    set dial += m
+
+    if dial >= 100 || dial <= 0 then {
+        set amount_zero2 += !-dial / 100
+        set amount_zero2++ when dial <= 0 && prev != 0
     }
 
-    set c %= 100
-    set c += 100 when c < 0
-    set amount_zero++ when c == 0
-} for i in movements
+    set dial %= 100
+    set dial += 100 when dial < 0
+    
+    set amount_zero++ when dial == 0
+} for m in movements
 
 do sayln(`Part 1: {amount_zero}`)
 do sayln(`Part 2: {amount_zero2}`)
-
 
 define to_number (rotation) {
     const number_string = substring(rotation, 1)
