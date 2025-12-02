@@ -9,7 +9,7 @@ do {
     
     do {
         set c += is_valid(i) ? 0 : i
-        set c2 += is_valid2(i) ? 0 : i
+        // set c2 += is_valid2(i) ? 0 : i
     } for i in range(stringToInt(start), stringToInt(end) + 1)
 } for r in ranges
 
@@ -17,26 +17,27 @@ do sayln(`Part 1: {c}`)
 do sayln(`Part 2: {c2}`)
 
 define is_valid (string number_string) {
-    if len(number_string) % 2 != 0 then {
+    const digits = len(number_string)
+    if digits % 2 != 0 then {
         return true
     }
 
-    const mid = len(number_string) / 2
-    const first_half = substring(number_string, 0, mid - 1)
-    const second_half = substring(number_string, mid)
-    return first_half != second_half
+    const num = stringToInt(number_string)
+
+    return num % (10**(digits / 2) + 1) != 0
 }
 
 define is_valid2 (string number_string) {
-    if len(number_string) <= 1 then {
+    const digits = len(number_string)
+    if digits <= 1 then {
         return true
     }
 
-    const mid = len(number_string) / 2
+    const mid = digits / 2
     do {
         make parts = []
         do push(parts, substring(number_string, i, i + size - 1)) for i in range(0, len(number_string), size)
-        
+
         make is_match = true
         const pivot = parts#0
         do {
