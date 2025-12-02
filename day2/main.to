@@ -45,7 +45,7 @@ define is_valid2 (num) {
             return num % 11111 != 0
         }
         6 => {
-            return num % 1001 != 0 && num % 10101 != 0 && num % 111111 != 0
+            return num % 1001 != 0 && num % 10101 != 0
         }
         7 => {
             return num % 1111111 != 0
@@ -57,7 +57,7 @@ define is_valid2 (num) {
             return num % 1001001 != 0
         }
         10 => {
-            return num % 100001 != 0 && num % 101010101 != 0 && num % 1111111111 != 0
+            return num % 100001 != 0 && num % 101010101 != 0
         }
         other => {
             do sayln(`Warning: unhandled number of digits {digits}`)
