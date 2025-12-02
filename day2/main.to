@@ -1,0 +1,51 @@
+const input = read("input.txt")
+const ranges = stringSplit(input, ",")
+
+make c = 0
+make c2 = 0
+
+do {
+    const start, end #= stringSplit(r, "-")
+    
+    do {
+        set c += is_valid(i) ? 0 : i
+        set c2 += is_valid2(i) ? 0 : i
+    } for i in range(stringToInt(start), stringToInt(end) + 1)
+} for r in ranges
+
+do sayln(`Part 1: {c}`)
+do sayln(`Part 2: {c2}`)
+
+define is_valid (string number_string) {
+    if len(number_string) % 2 != 0 then {
+        return true
+    }
+
+    const mid = len(number_string) / 2
+    const first_half = substring(number_string, 0, mid - 1)
+    const second_half = substring(number_string, mid)
+    return first_half != second_half
+}
+
+define is_valid2 (string number_string) {
+    if len(number_string) <= 1 then {
+        return true
+    }
+
+    const mid = len(number_string) / 2
+    do {
+        make parts = []
+        do push(parts, substring(number_string, i, i + size - 1)) for i in range(0, len(number_string), size)
+        
+        make is_match = true
+        const pivot = parts#0
+        do {
+            set is_match = pivot == p
+            break when is_match == false
+        } for p in parts
+
+        return false when is_match == true
+    } for size in range(1, mid + 1)
+
+    return true
+}
