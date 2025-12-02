@@ -60,7 +60,7 @@ define is_valid2 (num) {
             return num % 100001 != 0 && num % 101010101 != 0 && num % 1111111111 != 0
         }
         other => {
-            do sayln(`Warning: unhandled number of digits {digits}`) when digits > 10
+            do sayln(`Warning: unhandled number of digits {digits}`)
             return true
         }
     }
