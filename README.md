@@ -35,3 +35,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Ended up doing the mathy approach
 - Part 2
     - Mathy approach was not the easier way here, spending more time than I wanted to on this one, but switched to a more straightforward approach and got it done. Optimised to use a mathy approach after the fact.
+### Day 2
+- Part 1
+    - Straightforward implementation, but a bit slow.
+- Part 2
+    - This slowness carried over to part 2 as well. Need to optimise this heavily, there must be some trick to detect repeated digits without checking the ENTIRE range.
