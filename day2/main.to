@@ -45,7 +45,7 @@ define is_valid2 (string number_string) {
     return false when digits == 9 && num % 1001001 == 0
     return false when digits == 10 && (num % 100001 == 0 || num % 101010101 == 0 || num % 1111111111 == 0)
 
-    do sayln(`Warning: unhandled number of digits {digits}`)
+    do sayln(`Warning: unhandled number of digits {digits}`) when digits > 10
 
     return true
 }
