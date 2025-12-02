@@ -16,36 +16,54 @@ do {
 do sayln(`Part 1: {c}`)
 do sayln(`Part 2: {c2}`)
 
-define is_valid (string number_string) {
-    const digits = len(number_string)
+define is_valid (num) {
+    const digits = len((string)num)
     if digits % 2 != 0 then {
         return true
     }
 
-    const num = stringToInt(number_string)
-
     return num % (10**(digits / 2) + 1) != 0
 }
 
-define is_valid2 (string number_string) {
-    const digits = len(number_string)
+define is_valid2 (num) {
+    const digits = len((string)num)
     if digits <= 1 then {
         return true
     }
 
-    const num = stringToInt(number_string)
-
-    return false when digits == 2 && num % 11 == 0
-    return false when digits == 3 && num % 111 == 0
-    return false when digits == 4 && num % 101 == 0
-    return false when digits == 5 && num % 11111 == 0
-    return false when digits == 6 && (num % 1001 == 0 || num % 10101 == 0 || num % 111111 == 0)
-    return false when digits == 7 && num % 1111111 == 0
-    return false when digits == 8 && num % 10001 == 0
-    return false when digits == 9 && num % 1001001 == 0
-    return false when digits == 10 && (num % 100001 == 0 || num % 101010101 == 0 || num % 1111111111 == 0)
-
-    do sayln(`Warning: unhandled number of digits {digits}`) when digits > 10
+    match digits => {
+        2 => {
+            return num % 11 != 0
+        }
+        3 => {
+            return num % 111 != 0
+        }
+        4 => {
+            return num % 101 != 0
+        }
+        5 => {
+            return num % 11111 != 0
+        }
+        6 => {
+            return num % 1001 != 0 && num % 10101 != 0 && num % 111111 != 0
+        }
+        7 => {
+            return num % 1111111 != 0
+        }
+        8 => {
+            return num % 10001 != 0
+        }
+        9 => {
+            return num % 1001001 != 0
+        }
+        10 => {
+            return num % 100001 != 0 && num % 101010101 != 0 && num % 1111111111 != 0
+        }
+        other => {
+            do sayln(`Warning: unhandled number of digits {digits}`) when digits > 10
+            return true
+        }
+    }
 
     return true
 }
