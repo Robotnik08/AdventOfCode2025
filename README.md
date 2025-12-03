@@ -40,3 +40,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Straightforward implementation, but a bit slow.
 - Part 2
     - This slowness carried over to part 2 as well. Need to optimise this heavily, there must be some trick to detect repeated digits without checking the ENTIRE range.
+### Day 3
+- Part 1
+    - Very easy implementation.
+- Part 2
+    - Had to remake the entire thing to accomodate for the new logic, but it was still pretty straightforward, works with any battery size.
