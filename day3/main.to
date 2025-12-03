@@ -1,0 +1,41 @@
+const input = read("input.txt")
+const banks = stringSplit(input, "\n")
+
+make c1 = 0
+
+set c1 += get_power_level(bank, 2) for bank in banks
+
+do sayln(`Part 1: {c1}`)
+
+make c2 = 0
+
+set c2 += get_power_level(bank, 12) for bank in banks
+
+do sayln(`Part 2: {c2}`)
+
+define get_power_level (bank, digits) {
+    const length = len(bank)
+    const bank_nums = map(stringSplit(bank, ""), stringToInt)
+
+    make m = [0] * digits
+    make highest_index = 0
+    do {
+        make exclude_amount = digits - 1 - i
+        make highest = 0
+        do {
+            if bank_nums#j > highest then {
+                set highest = bank_nums#j
+                set highest_index = j
+            }
+        } for j in range(highest_index, length - exclude_amount)
+        set m#i = highest
+        set highest_index++
+    } for i in range(digits)
+
+    make power_level = 0
+    do {
+        set power_level = power_level * 10 + m#i
+    } for i in range(digits)
+
+    return power_level
+}
