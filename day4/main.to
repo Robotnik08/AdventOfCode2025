@@ -1,5 +1,5 @@
 const input = read("input.txt")
-const grid = map(stringSplit(stringJoin(stringSplit(input, "\n"), ""), ""), e => e == "@")
+const grid = map(stringSplit(stringJoin(stringSplit(input, "\n"), ""), ""), e => e == "@") // From .@ to boolean flat grid array
 const int grid_size = ^/len(grid)
 
 make stack = []
