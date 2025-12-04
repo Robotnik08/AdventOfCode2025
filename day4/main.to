@@ -2,20 +2,18 @@ const input = read("input.txt")
 const grid = map(stringSplit(stringJoin(stringSplit(input, "\n"), ""), ""), e => e == "@") // From .@ to boolean flat grid array
 const int grid_size = ^/len(grid)
 
+const directions = [-1, 0, 1]
 make stack = []
 
 make c1 = 0
 
-do {
+if grid#i then {
     const x, y = i % grid_size, i / grid_size
-    make at = grid#i
-    if at then {
-        const around, indexes #= count_around(x, y)
-        if around < 4 then {
-            set c1++
-            do push(stack, i)
-            do push(stack, j) for j in indexes
-        }
+    const around, indexes #= count_around(x, y)
+    if around < 4 then {
+        set c1++
+        do push(stack, i)
+        do push(stack, j) for j in indexes
     }
 } for i in range(len(grid))
 
@@ -23,12 +21,10 @@ make c2 = 0
 
 do {
     const i = pop(stack)
-    const x, y = i % grid_size, i / grid_size
-    make at = grid#i
-    if at then {
+    if grid#i then {
+        const x, y = i % grid_size, i / grid_size
         const around, indexes #= count_around(x, y)
-        make removable = around < 4
-        if removable then {
+        if around < 4 then {
             set c2++
             set grid#i = false
             do push(stack, j) for j in indexes
@@ -42,17 +38,16 @@ do sayln(`Part 2: {c2}`)
 define count_around (x, y) {
     make count = 0
     make around_indexes = []
-    do {
-        do {
-            continue when dx == 0 && dy == 0
-            if is_in_bounds(x + dx, y + dy) then {
-                if grid#((y + dy) * grid_size + (x + dx)) then {
-                    set count++
-                    do push(around_indexes, ((y + dy) * grid_size + (x + dx)))
-                }
+    do { 
+        continue when dx == 0 && dy == 0
+        if is_in_bounds(x + dx, y + dy) then {
+            const index = (y + dy) * grid_size + (x + dx)
+            if grid#index then {
+                set count++
+                do push(around_indexes, index)
             }
-        } for dx in [-1, 0, 1]
-    } for dy in [-1, 0, 1]
+        }
+    } for dx in directions for dy in directions
 
     return [count, around_indexes]
 }
