@@ -39,7 +39,7 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
 - Part 1
     - Straightforward implementation, but a bit slow.
 - Part 2
-    - This slowness carried over to part 2 as well. Need to optimise this heavily, there must be some trick to detect repeated digits without checking the ENTIRE range.
+    - This slowness carried over to part 2 as well. Need to optimise this heavily, there must be some trick to detect repeated digits without checking the ENTIRE range. (update later: I made it way quicker with modulos)
 ### Day 3
 - Part 1
     - Very easy implementation.
