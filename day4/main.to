@@ -1,0 +1,55 @@
+const input = read("input.txt")
+const grid = stringSplit(input, "\n")
+const grid_height = len(grid)
+const grid_width = len(grid#0)
+
+make c1 = 0
+
+do {
+    make line = grid#i
+    if line#j == "@" then {
+        set c1++ when count_around(j, i) < 4
+    } for j in range(grid_width)
+} for i in range(grid_height)
+
+make c2 = 0
+
+make iteration = 0
+make changed = true
+do {
+    set changed = false
+    do {
+        make line = grid#i
+        if line#j == "@" then {
+            make removable = count_around(j, i) < 4
+            if removable then {
+                set c2++
+                set changed = true
+                set grid#i#j = "."
+            }
+        } for j in range(grid_width)
+    } for i in range(grid_height)
+    set iteration++
+} while changed
+
+do sayln(`Part 1: {c1}`)
+do sayln(`Part 2: {c2}`)
+
+define count_around (x, y) {
+    make count = 0
+
+    do {
+        do {
+            continue when dx == 0 && dy == 0
+            if is_in_bounds(x + dx, y + dy) then {
+                set count++ when grid#(y + dy)#(x + dx) == "@"
+            }
+        } for dx in [-1, 0, 1]
+    } for dy in [-1, 0, 1]
+
+    return count
+}
+
+define is_in_bounds (x, y) {
+    return x >= 0 && x < grid_width && y >= 0 && y < grid_height
+}
