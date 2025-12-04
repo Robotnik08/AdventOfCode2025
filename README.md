@@ -45,3 +45,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Very easy implementation.
 - Part 2
     - Had to remake the entire thing to accomodate for the new logic, but it was still pretty straightforward, works with any battery size.
+### Day 4
+- Part 1
+    - Initial implementation, straightforward.
+- Part 2
+    - Fun solve, but was a bit slow, so I improved it by using a stack to keep track of what needs to be checked, instead of checking the entire grid every iteration.
