@@ -1,16 +1,16 @@
 const input = read("input.txt")
-const grid = stringSplit(input, "\n")
-const grid_height = len(grid)
-const grid_width = len(grid#0)
+const grid = map(stringSplit(stringJoin(stringSplit(input, "\n"), ""), ""), e => e == "@")
+const int grid_size = ^/len(grid)
 
 make c1 = 0
 
 do {
-    make line = grid#i
-    if line#j == "@" then {
-        set c1++ when count_around(j, i) < 4
-    } for j in range(grid_width)
-} for i in range(grid_height)
+    const x, y = i % grid_size, i / grid_size
+    make at = grid#i
+    if at then {
+        set c1++ when count_around(x, y) < 4
+    }
+} for i in range(len(grid))
 
 make c2 = 0
 
@@ -19,16 +19,17 @@ make changed = true
 do {
     set changed = false
     do {
-        make line = grid#i
-        if line#j == "@" then {
-            make removable = count_around(j, i) < 4
+        const x, y = i % grid_size, i / grid_size
+        make at = grid#i
+        if at then {
+            make removable = count_around(x, y) < 4
             if removable then {
                 set c2++
                 set changed = true
-                set grid#i#j = "."
+                set grid#i = false
             }
-        } for j in range(grid_width)
-    } for i in range(grid_height)
+        }
+    } for i in range(len(grid))
     set iteration++
 } while changed
 
@@ -42,7 +43,7 @@ define count_around (x, y) {
         do {
             continue when dx == 0 && dy == 0
             if is_in_bounds(x + dx, y + dy) then {
-                set count++ when grid#(y + dy)#(x + dx) == "@"
+                set count++ when grid#((y + dy) * grid_size + (x + dx))
             }
         } for dx in [-1, 0, 1]
     } for dy in [-1, 0, 1]
@@ -51,5 +52,5 @@ define count_around (x, y) {
 }
 
 define is_in_bounds (x, y) {
-    return x >= 0 && x < grid_width && y >= 0 && y < grid_height
+    return x >= 0 && x < grid_size && y >= 0 && y < grid_size
 }
