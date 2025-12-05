@@ -1,16 +1,12 @@
 const input = read("input.txt")
 const rangesstring, ingedientsstring #= stringSplit(input, "\n\n")
 const ranges = stringSplit(rangesstring, "\n")
-const ingredients = map(stringSplit(ingedientsstring, "\n"), stringToInt)
+const ingredients = sort(map(stringSplit(ingedientsstring, "\n"), stringToInt))
+const ingredients_count = len(ingredients)
 
 set ranges#i = map(stringSplit(ranges#i, "-"), stringToInt) for i in range(len(ranges))
 
 make c1 = 0
-set c1++ then {break} when ing >= r#0 && ing <= r#1 for r in ranges for ing in ingredients
-
-do sayln(`Part 1: {c1}`)
-
-
 make c2 = 0
 
 make range_sorted = []
@@ -22,17 +18,21 @@ do {
 
 do sort(range_sorted, (a, b) => a#0 - b#0)
 
-make in_range_count, prev = 0
+make in_range_count, prev, ingredients_index = 0
 
 do {
     const value, delta #= r
 
-    if in_range_count > 0 then {
-        set c2 += value - prev
-    }
+    set c2 += value - prev when in_range_count > 0
+
+    do {
+        set c1 += 1 when in_range_count > 0
+        set ingredients_index += 1
+    } while ingredients_index < ingredients_count && ingredients#ingredients_index >= prev && ingredients#ingredients_index < value
 
     set in_range_count += delta
     set prev = value
 } for r in range_sorted
 
+do sayln(`Part 1: {c1}`)
 do sayln(`Part 2: {c2}`)
