@@ -5,28 +5,15 @@ const ingredients = map(stringSplit(ingedientsstring, "\n"), stringToInt)
 
 set ranges#i = map(stringSplit(ranges#i, "-"), stringToInt) for i in range(len(ranges))
 
-define check_if_in_range(num) {
-    do {
-        return true when num <= r#1 when num >= r#0
-    } for r in ranges
-
-    return false
-}
-
 make c1 = 0
+set c1++ then {break} when ing >= r#0 && ing <= r#1 for r in ranges for ing in ingredients
 
-set c1++ when check_if_in_range(ing) for ing in ingredients
+do sayln(`Part 1: {c1}`)
 
 
 make c2 = 0
 
-make starts, ends = [], []
-do push(starts, r#0) then push(ends, r#1) for r in ranges
-do sort(starts)
-do sort(ends)
-
 make range_sorted = []
-
 do {
     const start, end #= r
     do push(range_sorted, [start, 1])
@@ -48,5 +35,4 @@ do {
     set prev = value
 } for r in range_sorted
 
-do sayln(`Part 1: {c1}`)
 do sayln(`Part 2: {c2}`)
