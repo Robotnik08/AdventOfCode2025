@@ -50,3 +50,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Initial implementation, straightforward.
 - Part 2
     - Fun solve, but was a bit slow, so I improved it by using a stack to keep track of what needs to be checked, instead of checking the entire grid every iteration.
+### Day 5
+- Part 1
+    - My brain decided to not wake up on time today, so I was late, part 1 was easy though.
+- Part 2
+    - I was overthinking this one too much, in this end sorting the start and end positions and keeping track of how many ranges cover each position works really quickly.
