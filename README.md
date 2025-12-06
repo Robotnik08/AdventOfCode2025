@@ -55,3 +55,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - My brain decided to not wake up on time today, so I was late, part 1 was easy though.
 - Part 2
     - I was overthinking this one too much, in this end sorting the start and end positions and keeping track of how many ranges cover each position, works really quickly.
+### Day 6
+- Part 1
+    - I woke at at 9am to preserve my sanity, anyways, very easy day.
+- Part 2
+    - Same as part 1, I merged them all into collumns and just did it, very easy day today.
