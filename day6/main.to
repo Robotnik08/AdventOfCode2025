@@ -1,0 +1,84 @@
+const input = read("input.txt")
+
+const lines = stringSplit(input, "\n")
+
+set lines#i = stringSplit(lines#i, " ") for i in range(len(lines))
+
+const operations = lines#(-1)
+
+make c1 = 0
+do {
+    make stack = []
+    do {
+        do push(stack, stringToInt(lines#j#i))
+    } for j in range(len(lines) - 1)
+
+    make val = stack#0
+
+    const operation = operations#i
+    do {
+        match operation => {
+            "*" => {
+                set val *= stack#j
+            }
+            "+" => {
+                set val += stack#j
+            }
+        }
+    } for j in range(1, len(stack))
+
+    set c1 += val
+} for i in range(len(operations))
+
+do sayln(`Part 1: {c1}`)
+
+make c2 = 0
+
+const rows = stringSplit(input, "\n")
+const columns = []
+
+make last_operation = '\0'
+do {
+    make num = ""
+    do {
+        set num += (string)(rows#j#i) when rows#j#i != ' '
+    } for j in range(len(rows) - 1)
+    if num == "" then {
+        do push(columns, false)
+        continue
+    }
+    const found_operation = rows#(-1)#i
+    if found_operation != ' ' then {
+        set last_operation = found_operation
+    }
+
+    do push(columns, [stringToInt(num), last_operation])
+} for i in range(rows#0)
+
+do push(columns, false)
+
+make val = 0
+make first = true
+do {
+    if col == false then {
+        set c2 += val
+        set val = 0
+        set first = true
+        continue
+    }
+    const operation = col#1
+    match operation => {
+        "*" => {
+            if first then {
+                set val = 1
+            }
+            set val *= col#0
+        }
+        "+" => {
+            set val += col#0
+        }
+    }
+    set first = false
+} for col in columns
+
+do sayln(`Part 2: {c2}`)
