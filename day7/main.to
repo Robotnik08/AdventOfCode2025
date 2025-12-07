@@ -1,0 +1,29 @@
+const input = read("input.txt")
+const lines = stringSplit(input, "\n")
+
+const start_position = indexOf(stringSplit(lines#0, ""), "S")
+make beams = {(start_position): 1}
+
+make c1 = 0
+
+do {
+    const line_chars = stringSplit(line, "")
+    make new_beams = {}
+
+    do {
+        const key, value #= entry
+        if line#key == "^" then {
+            set new_beams->(key - 1) += value
+            set new_beams->(key + 1) += value
+            
+            set c1++
+        } else {
+            set new_beams->(key) += value
+        }
+    } for entry in entries(beams)
+
+    set beams = new_beams
+} for line in lines
+
+do sayln(`Part 1: {c1}`)
+do sayln(`Part 2: {sum(values(beams))}`)
