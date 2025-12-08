@@ -1,41 +1,51 @@
 const input = read("input.txt")
 const lines = stringSplit(input, "\n")
 
-const locations = map(lines, (line, i) => [i] + map(stringSplit(line, ","), stringToInt))
+const locations = []
+do push(locations, [i] + map(stringSplit(lines#i, ","), stringToInt)) for i in range(lines)
 
-define double get_distance (double dx, double dy, double dz) {
-    return sqrt((!-dx)**2 + (!-dy)**2 + (!-dz)**2)
-}
-
-define find_shortest_index_pair (index) {
-    make double shortest_found_distance = Infinity
-    make s_index = -1
-    const l = locations#index
-    do {
-        continue when index == lc#0
-
-        const double d = get_distance(l#1 - lc#1, l#2 - lc#2, l#3 - lc#3)
-
-        if d < shortest_found_distance then {
-            set shortest_found_distance = d
-            set s_index = lc#0
-        }
-    } for lc in locations
-
-    return [s_index, shortest_found_distance]
-}
+make circuits = {}
+set circuits->(l#0) = [l#0] for l in locations
 
 const pairs = []
-do push(pairs, [l#0] + find_shortest_index_pair(l#0)) for l in locations
+do {
+    const l1 = locations#i
+    do {
+        const l2 = locations#j
+        do push(pairs, [l1#0, l2#0, (l1#1 - l2#1)**2 + (l1#2 - l2#2)**2 + (l1#3 - l2#3)**2])
+    } for j in range(i + 1, len(locations))
+} for i in range(len(locations))
 
 do sort(pairs, (a, b) => a#2 - b#2)
 
-const unions = []
+make p1, p2 = 0
 
 do {
-    // find in union
-    make i = -1
+    const p = pairs#pair_index
+    make circuit1, circuit2 = -1
+
+    if pair_index == 1000 then {
+        const sizes = sort(map(values(circuits), v => len(v)))
+        set p1 = sizes#(-1) * sizes#(-2) * sizes#(-3)
+    }
+
     do {
-        if contains(unions#j, p#0)
-    } for j in range(unions)
-} for p in pairs
+        set circuit1 = c#0 when contains(circuits->(c#0), p#0)
+        set circuit2 = c#0 when contains(circuits->(c#0), p#1)
+    } for c in entries(circuits)
+
+    if circuit1 != circuit2 then {
+        set circuits->(circuit1) = removeDuplicates(circuits->(circuit1) + circuits->(circuit2))
+        set circuits -= circuit2
+    }
+
+    if len(keys(circuits)) == 1 then {
+        const location1 = locations#(p#0)
+        const location2 = locations#(p#1)
+        set p2 = location1#1 * location2#1
+        break
+    }
+} for pair_index in range(len(pairs))
+
+do sayln(`Part 1: {p1}`)
+do sayln(`Part 2: {p2}`)
