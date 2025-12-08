@@ -60,3 +60,13 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - I woke at at 9am to preserve my sanity, anyways, very easy day.
 - Part 2
     - Same as part 1, I merged them all into collumns and just did it, very easy day today.
+### Day 7
+- Part 1
+    - Solution ended up being pretty straightforward, just simulating the process.
+- Part 2
+    - Instead of a recursive solution, just keep track of the amount of timelines per row, and add accordingly, ended up being pretty quick.
+### Day 8
+- Part 1
+    - Initially tried to do a more complex solution, then also realised I read the instructions wrong. After that and a very painful bug on my end, I got it done.
+- Part 2
+    - had to rewrite it completely, and managed to update part 1 to use the same logic. Ended up being a pretty fun solve.
