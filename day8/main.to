@@ -1,0 +1,41 @@
+const input = read("input.txt")
+const lines = stringSplit(input, "\n")
+
+const locations = map(lines, (line, i) => [i] + map(stringSplit(line, ","), stringToInt))
+
+define double get_distance (double dx, double dy, double dz) {
+    return sqrt((!-dx)**2 + (!-dy)**2 + (!-dz)**2)
+}
+
+define find_shortest_index_pair (index) {
+    make double shortest_found_distance = Infinity
+    make s_index = -1
+    const l = locations#index
+    do {
+        continue when index == lc#0
+
+        const double d = get_distance(l#1 - lc#1, l#2 - lc#2, l#3 - lc#3)
+
+        if d < shortest_found_distance then {
+            set shortest_found_distance = d
+            set s_index = lc#0
+        }
+    } for lc in locations
+
+    return [s_index, shortest_found_distance]
+}
+
+const pairs = []
+do push(pairs, [l#0] + find_shortest_index_pair(l#0)) for l in locations
+
+do sort(pairs, (a, b) => a#2 - b#2)
+
+const unions = []
+
+do {
+    // find in union
+    make i = -1
+    do {
+        if contains(unions#j, p#0)
+    } for j in range(unions)
+} for p in pairs
