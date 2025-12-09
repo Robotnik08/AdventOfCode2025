@@ -3,11 +3,51 @@ const corners = []
 do push(corners, map(stringSplit(line, ","), stringToInt)) for line in lines
 
 make c1 = 0
+make max_y, max_x = 0
 do {
     do {
         const area = !-(corners#i#0 - corners#j#0 + 1) * !-(corners#i#1 - corners#j#1 + 1)
         set c1 = area when area > c1
+        set max_x = corners#j#0 when corners#j#0 > max_x
+        set max_y = corners#j#1 when corners#j#1 > max_y
     } for j in range(i + 1, corners)
 } for i in range(corners)
 
 do sayln(`Part 1: {c1}`)
+
+make grid = *([[false] * (max_x + 1)] * (max_y + 1))
+
+make last_x, last_y = 0, 0
+do {
+    const x, y #= c
+
+    if c == corners#0 then {
+        set last_x, last_y = x, y
+        continue
+    }
+
+    do sayln(`Drawing line from ({last_x}, {last_y}) to ({x}, {y})`)
+
+    if x == last_x then {
+        do {
+            set grid#new_y#x = true
+        } for new_y in range(min(y, last_y), max(y, last_y) + 1)
+    } else {
+        // do {
+        //     set grid#y#(min(x, last_x) + i) = true
+        // } for i in range(abs(x - last_x) + 1)
+    }
+    set last_x, last_y = x, y
+} for c in corners
+
+do print_grid(grid)
+
+define print_grid (grid) {
+    do {
+        make line = ""
+        do {
+            set line += grid#i#j ? "#" : "."
+        } for j in range(len(grid#i))
+        do sayln(line)
+    } for i in range(len(grid))
+}
