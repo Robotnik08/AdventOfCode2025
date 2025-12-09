@@ -1,0 +1,13 @@
+const lines = stringSplit(read("input.txt"), "\n")
+const corners = []
+do push(corners, map(stringSplit(line, ","), stringToInt)) for line in lines
+
+make c1 = 0
+do {
+    do {
+        const area = !-(corners#i#0 - corners#j#0 + 1) * !-(corners#i#1 - corners#j#1 + 1)
+        set c1 = area when area > c1
+    } for j in range(i + 1, corners)
+} for i in range(corners)
+
+do sayln(`Part 1: {c1}`)
