@@ -5,9 +5,7 @@ do push(corners, map(stringSplit(line, ","), stringToInt)) for line in lines
 
 define get_rects (pairs) {
     make rects = []
-    do {
-        do push(rects, [pair#0#0 <| pair#1#0, pair#0#1 <| pair#1#1, pair#0#0 >| pair#1#0, pair#0#1 >| pair#1#1])
-    } for pair in pairs
+    do push(rects, [pair#0#0 <| pair#1#0, pair#0#1 <| pair#1#1, pair#0#0 >| pair#1#0, pair#0#1 >| pair#1#1]) for pair in pairs
     return rects
 }
 
