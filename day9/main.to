@@ -2,52 +2,47 @@ const lines = stringSplit(read("input.txt"), "\n")
 const corners = []
 do push(corners, map(stringSplit(line, ","), stringToInt)) for line in lines
 
-make c1 = 0
-make max_y, max_x = 0
-do {
+
+define get_rects (pairs) {
+    make rects = []
     do {
-        const area = !-(corners#i#0 - corners#j#0 + 1) * !-(corners#i#1 - corners#j#1 + 1)
-        set c1 = area when area > c1
-        set max_x = corners#j#0 when corners#j#0 > max_x
-        set max_y = corners#j#1 when corners#j#1 > max_y
-    } for j in range(i + 1, corners)
-} for i in range(corners)
+        do push(rects, [pair#0#0 <| pair#1#0, pair#0#1 <| pair#1#1, pair#0#0 >| pair#1#0, pair#0#1 >| pair#1#1])
+    } for pair in pairs
+    return rects
+}
+
+const length = len(corners)
+
+const pairs = []
+do push(pairs, [corners#i, corners#((i+1) % length)]) for i in range(length)
+
+const combination_pairs = []
+do push(combination_pairs, [corners#i, corners#j]) for j in range(i + 1, length) for i in range(length)
+
+const green_edges = get_rects(pairs)
+
+make c1, c2 = 0
+do {
+    const min_x, min_y, max_x, max_y #= g
+    const area = (max_x - min_x + 1) * (max_y - min_y + 1)
+
+    if area > c2 then {
+        make overlaps = false
+        do {
+            const min_x2, min_y2, max_x2, max_y2 #= edge
+            if min_x2 < max_x && max_x2 > min_x && min_y2 < max_y && max_y2 > min_y then {
+                set overlaps = true
+                break
+            }
+        } for edge in green_edges
+
+        set c2 = area when !overlaps
+    }
+
+    if area > c1 then {
+        set c1 = area
+    }
+} for g in get_rects(combination_pairs)
 
 do sayln(`Part 1: {c1}`)
-
-make grid = *([[false] * (max_x + 1)] * (max_y + 1))
-
-make last_x, last_y = 0, 0
-do {
-    const x, y #= c
-
-    if c == corners#0 then {
-        set last_x, last_y = x, y
-        continue
-    }
-
-    do sayln(`Drawing line from ({last_x}, {last_y}) to ({x}, {y})`)
-
-    if x == last_x then {
-        do {
-            set grid#new_y#x = true
-        } for new_y in range(min(y, last_y), max(y, last_y) + 1)
-    } else {
-        // do {
-        //     set grid#y#(min(x, last_x) + i) = true
-        // } for i in range(abs(x - last_x) + 1)
-    }
-    set last_x, last_y = x, y
-} for c in corners
-
-do print_grid(grid)
-
-define print_grid (grid) {
-    do {
-        make line = ""
-        do {
-            set line += grid#i#j ? "#" : "."
-        } for j in range(len(grid#i))
-        do sayln(line)
-    } for i in range(len(grid))
-}
+do sayln(`Part 2: {c2}`)
