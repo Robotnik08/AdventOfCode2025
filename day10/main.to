@@ -5,14 +5,47 @@ const lights, buttons, joltage = [], [], []
 
 do {
     const parts = stringSplit(line, " ")
-    do push(lights, shift(parts))
+
+    const light_string = substring(shift(parts), 1, -2)
+    make light_num = 0
+    set light_num |= (light_string#j == "#") ? (1 << j) : 0 for j in range(len(light_string))
+    do push(lights, light_num)
+
     do push(joltage, pop(parts))
-    do push(buttons, parts)
+    
+    const button_nums = []
+    do {
+        const button_string = substring(part, 1, -2)
+        make button_num = 0
+        set button_num |= 1 << stringToInt(button_string#k) for k in range(0, len(button_string), 2)
+        do push(button_nums, button_num)
+    } for part in parts
+    do push(buttons, button_nums)
 } for line in lines
+
+make c1 = 0
 
 do {
     const b = buttons#i
     const light = lights#i
     
-    
+    make found = false
+    do {
+        const button_combinations = combinations(b, amount + 1)
+
+        do {
+            make combined = 0
+            set combined ^= c for c in combo
+
+            if combined == light then {
+                set found = true
+                set c1 += amount + 1
+                break
+            }
+        } for combo in button_combinations
+
+        break when found
+    } for amount in range(len(b))
 } for i in range(len(lights))
+
+do sayln(`Part 1: {c1}`)
