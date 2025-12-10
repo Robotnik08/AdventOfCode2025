@@ -1,7 +1,7 @@
 const input = read("input.txt")
 const lines = stringSplit(input, "\n")
 
-const lights, buttons, joltage = [], [], []
+const lights, buttons = [], []
 
 do {
     const parts = stringSplit(line, " ")
@@ -11,7 +11,7 @@ do {
     set light_num |= (light_string#j == "#") ? (1 << j) : 0 for j in range(len(light_string))
     do push(lights, light_num)
 
-    do push(joltage, pop(parts))
+    do pop(parts)
     
     const button_nums = []
     do {
@@ -49,3 +49,6 @@ do {
 } for i in range(len(lights))
 
 do sayln(`Part 1: {c1}`)
+
+// Part 2 is done in python for now
+do system("py part2.py")
