@@ -1,0 +1,18 @@
+const input = read("input.txt")
+const lines = stringSplit(input, "\n")
+
+const lights, buttons, joltage = [], [], []
+
+do {
+    const parts = stringSplit(line, " ")
+    do push(lights, shift(parts))
+    do push(joltage, pop(parts))
+    do push(buttons, parts)
+} for line in lines
+
+do {
+    const b = buttons#i
+    const light = lights#i
+    
+    
+} for i in range(len(lights))
