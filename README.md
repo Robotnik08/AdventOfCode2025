@@ -70,3 +70,13 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Initially tried to do a more complex solution, then also realised I read the instructions wrong. After that and a very painful bug on my end, I got it done.
 - Part 2
     - had to rewrite it completely, and managed to update part 1 to use the same logic. Ended up being a pretty fun solve.
+### Day 9
+- Part 1
+    - Straightforward implementation of the problem statement.
+- Part 2
+    - Way harder, In the end grouped all edges together, and ran for each rect combination. It's kinda bruteforcey but it works.
+### Day 10
+- Part 1
+    - Very clean and elegant solution by XORing all combinations of buttons until the correct light configuration is found.
+- Part 2
+    - Unfortunetely couldn't think of a programmatic way to solve part 2, so I caved in and used python with z3 to solve it really quickly. A bit of a bummer, might get back to it later.
