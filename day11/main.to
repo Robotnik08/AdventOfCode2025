@@ -7,32 +7,21 @@ do {
     set nodes->(pair#0) = stringSplit(pair#1, " ")
 } for l in lines
 
-const memo = {}
-// get number of paths from you to out
-define count_paths (node_name, nodes, visited_fft, visited_dac) {
-    if node_name == "out" then {
-        return visited_fft && visited_dac ? 1 : 0
-    }
-    if memo->(`{[node_name, visited_fft, visited_dac]}`) then {
-        return memo->(`{[node_name, visited_fft, visited_dac]}`)
-    }
+define count_paths (start_node, end_node, memo) {
+    return memo->(start_node) when memo->(start_node) !== null
 
-    if node_name == "fft" then {
-        set visited_fft = true
-    }
-    if node_name == "dac" then {
-        set visited_dac = true
-    }
+    return 1 when start_node == end_node
+    return 0 when start_node == "out"
 
     make total = 0
-    do {
-        set total += count_paths(child, nodes, visited_fft, visited_dac)
-    } for child in nodes->(node_name)
+    set total += count_paths(child, end_node, memo) for child in nodes->(start_node)
 
-    set memo->(`{[node_name, visited_fft, visited_dac]}`) = total
-    // do sayln(`Memoizing {node_name} {visited_fft} {visited_dac}: {total}`)
+    set memo->(start_node) = total
     return total
 }
 
-// do sayln(`Part 1: {count_paths("you", nodes, true, true)}`)
-do sayln(`Part 2: {count_paths("svr", nodes, false, false)}`)
+do sayln(`Part 1: {count_paths("you", "out", {})}`)
+do sayln(`Part 2: {
+    count_paths("svr", "dac", {}) * count_paths("dac", "fft", {}) * count_paths("fft", "out", {})
+    + count_paths("svr", "fft", {}) * count_paths("fft", "dac", {}) * count_paths("dac", "out", {})
+}`)
