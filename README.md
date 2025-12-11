@@ -80,3 +80,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Very clean and elegant solution by XORing all combinations of buttons until the correct light configuration is found.
 - Part 2
     - Unfortunetely couldn't think of a programmatic way to solve part 2, so I caved in and used python with z3 to solve it really quickly. A bit of a bummer, might get back to it later.
+### Day 11
+- Part 1
+    - Memoized DFS to count all paths from "you" to "out".
+- Part 2
+    - Reused the memoized DFS to count all paths for the segments and multiplied the results. Decided to remove the cache as it was tainted per call, so I passed it as a parameter.
