@@ -1,0 +1,9 @@
+const lines = stringSplit(read("input.txt"), "\n\n")
+
+const shapes = []
+do push(shapes, stringCount(substring(stringRemove(lines#i, "\n"), 2), "#")) for i in range(len(lines) - 1)
+
+make c1 = 0
+set c1++ when reduce(map(stringSplit((stringSplit(line, ": "))#0, "x"), stringToInt), (a, b) => a * b, 1) >= sum(map(stringSplit((stringSplit(line, ": "))#1, " "), (e, i) => stringToInt(e) * shapes#i)) for line in stringSplit(lines#(-1), "\n")
+
+do sayln(`Part 1: {c1}`)
