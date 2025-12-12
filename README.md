@@ -85,3 +85,8 @@ Thats it really. I hope you enjoy the solutions. Feel free to reach out to me if
     - Memoized DFS to count all paths from "you" to "out".
 - Part 2
     - Reused the memoized DFS to count all paths for the segments and multiplied the results. Decided to remove the cache as it was tainted per call, so I passed it as a parameter.
+### Day 12
+- Part 1
+    - I originally overcomplicated this one a lot, but because of my sanity check, it seemed like theres so much room left over, so I could just count the areas and check if they fit.
+- Part 2
+    - Merry Christmas!
